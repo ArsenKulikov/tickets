@@ -1,9 +1,7 @@
-export const SET_CURRENCY_UAH = 'SET_CURRENCY_UAH';
-export const SET_CURRENCY_EURO = 'SET_CURRENCY_EURO';
-export const SET_CURRENCY_USD = 'SET_CURRENCY_USD';
-
 export const SET_ALL = 'SET_ALL';
-export const SET_ONE_TRANSFER = 'SET_ONE_TRANSFER';
-export const SET_TWO_TRANSFERS = 'SET_TWO_TRANSFERS';
-export const SET_THREE_TRANSFERS = 'SET_THREE_TRANSFERS';
-export const SET_WITHOUT_TRANSFERS = 'SET_WITHOUT_TRANSFERS';
+export const SET_ONE = '1';
+export const SET_TWO = '2';
+export const SET_THREE = '3';
+export const SET_NULL = '0';
+
+export const SET_CURRENCY = 'SET_CURRENCY';

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
+import { setCurrency } from '../../actions';
+import { connect } from 'react-redux';
 
-const fields = ['UAH', 'USD', 'EURO'];
+const fields = ['UAH', 'EURO', 'USD' ];
 
 class CurrenciesToogle extends Component {
-  changeCurrency = e => {
-    console.log(e.target.name);
-  };
 
   render() {
+    
     return (
       <div>
         <fieldset>
@@ -16,9 +16,10 @@ class CurrenciesToogle extends Component {
               <input
                 type="radio"
                 id={item}
-                name={item}
-                defaultChecked={item === 'UAH' ? true : false}
-                onChange={this.changeCurrency}
+                name='currencies'
+                value={item}
+                defaultChecked={item === 'UAH'}
+                onChange={() => this.props.setCurrency(item)}
               />
               <label htmlFor={item}>{item}</label>
             </div>
@@ -29,4 +30,15 @@ class CurrenciesToogle extends Component {
   }
 }
 
-export default CurrenciesToogle;
+const mapStateToProps = state => ({
+  currency: state.currencyReducer
+})
+
+const mapDispatchToProps = dispatch => ({
+  setCurrency: item => dispatch(setCurrency(item))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CurrenciesToogle);

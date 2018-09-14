@@ -1,11 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+
 import data from '../../db/tickets';
 import Ticket from '../Ticket/Ticket';
 
-const TicketsBar = props => {
+class TicketsBar extends Component {
+  state = {
+    tickets: []
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('should')
+    return true; //nextProps !== this.props.filters
+  }
+  
+
+  componentDidMount(){
+    this.setState({tickets: data.tickets})
+  }
+
+  render(){
+
+    const filters = this.props.filters;
+    console.log(filters)
+    const multiplier = this.props.currency.multiplier
+    let ticketsArray
+    if (!filters.length) {
+     ticketsArray = data.tickets 
+    } else {
+      ticketsArray = data.tickets.filter(ticket => {
+        console.log(ticket.stops)
+        return filters.some(filter => +filter === ticket.stops) 
+      })
+    }
+    console.log(ticketsArray)
   return (
     <div>
-      {data.tickets.map((ticket, index) => (
+      {ticketsArray
+        .map((ticket, index) => (
         <Ticket
           key={index}
           arrival_date={ticket.arrival_date}
@@ -17,12 +49,20 @@ const TicketsBar = props => {
           destination_name={ticket.destination_name}
           origin={ticket.origin}
           origin_name={ticket.origin_name}
-          price={ticket.price}
+          price={Math.ceil(ticket.price * multiplier)}
           stops={ticket.stops}
         />
       ))}
     </div>
   );
 };
+}
 
-export default TicketsBar;
+const mapStateToProps = (state) => ({
+  filters: state.visibilityFilterReducer.filters,
+  currency: state.currencyReducer
+})
+
+
+
+export default connect(mapStateToProps)(TicketsBar);

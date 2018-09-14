@@ -2,7 +2,7 @@ import React from 'react';
 
 const Ticket = props => {
   return (
-    <div>
+    <div style={{border: '1px solid black'}}>
       <span>{props.arrival_date} </span>
       <span>{props.arrival_time} </span>
       <span>{props.carrier} </span>

@@ -5,47 +5,21 @@ import data from '../../db/tickets';
 import Ticket from '../Ticket/Ticket';
 
 class TicketsBar extends Component {
-  state = {
-    tickets: []
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('should')
-    return true
-  }
-
-  componentDidMount(){
-    this.setState({tickets: data.tickets})
-  }
-
-  componentWillReceiveProps(nextProps){
-    // this.setState({tickets: data.tickets})
-    console.log(nextProps)
-  }
 
   render(){
     const filters = this.props.filters;
-    console.log(filters)
+
     const multiplier = this.props.currency.multiplier
     let ticketsArray
 
     if (filters.length){
       ticketsArray = data.tickets.filter(ticket => {
-        console.log(ticket.stops)
-        return filters.some(filter => +filter === ticket.stops) 
+         return filters.some(filter => +filter === ticket.stops) 
       })
     } else if (!filters.length) {
       ticketsArray = data.tickets 
     }
-    // if (!filters.length) {
-    //  ticketsArray = data.tickets 
-    // } else {
-    //   ticketsArray = data.tickets.filter(ticket => {
-    //     console.log(ticket.stops)
-    //     return filters.some(filter => +filter === ticket.stops) 
-    //   })
-    // }
-    console.log(ticketsArray)
+
   return (
     <div>
       {ticketsArray

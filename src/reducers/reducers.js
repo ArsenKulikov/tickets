@@ -6,7 +6,8 @@ const initialState = {
 
 function setFilter(state, filter) {
 
-  let newState = JSON.parse(JSON.stringify(state));
+  let newState = JSON.parse(JSON.stringify(state)); //так работает
+  //let newState = {...state}; //а так не работает 
  
   if (filter === 'SET_ALL') {
     newState.filters = [];

@@ -5,16 +5,19 @@ const initialState = {
 };
 
 function setFilter(state, filter) {
-  const newState = { ...state };
+  console.log(state)
+  let newState = JSON.parse(JSON.stringify(state));
+  console.log(newState)
   if (filter === 'SET_ALL') {
-    const setAllState = {...state}
-    setAllState.filters = [];
-    return setAllState
+    newState.filters = [];
+    return newState
   } else if (newState.filters.includes(filter)) {
     const index = newState.filters.indexOf(filter);
     newState.filters.splice(index, 1);
+    console.log(newState)
     return newState;
   } else if (!newState.filters.includes(filter)) {
+    console.log(newState)
     newState.filters.push(filter);
     return newState;
   }
@@ -23,6 +26,8 @@ function setFilter(state, filter) {
 
 
 export const visibilityFilterReducer = (state = initialState, action) => {
+  console.log(action.type === types.SET_ONE)
+
   switch (action.type) {
     case types.SET_ALL:
       return setFilter(state, 'SET_ALL');

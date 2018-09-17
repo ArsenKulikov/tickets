@@ -7,7 +7,6 @@ const fields = ['UAH', 'EURO', 'USD' ];
 class CurrenciesToogle extends Component {
 
   render() {
-    
     return (
       <div>
         <fieldset>

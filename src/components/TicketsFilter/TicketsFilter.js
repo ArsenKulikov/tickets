@@ -36,12 +36,15 @@ class TicketsFilter extends Component {
     if (filter === 'SET_ALL' ) {
       this.setState({SET_ALL: true, 0:false,1:false,2:false,3:false})
       this.props.setVisibilityFilter(filter);
+      console.log(filter)
     } else if (!filters.includes(filter) && filter !== 'SET_ALL') { 
       this.setState({SET_ALL:false, [e.target.name]: true})
       this.props.setVisibilityFilter(filter);
+      console.log(filter)
     } else if (filters.includes(filter) && filter !== 'SET_ALL') {
       this.setState({[e.target.name]: false})
       this.props.setVisibilityFilter(filter);
+      console.log(filter)
     }
   }
  

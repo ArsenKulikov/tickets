@@ -11,28 +11,40 @@ class TicketsBar extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log('should')
-    return true; //nextProps !== this.props.filters
+    return true
   }
-  
 
   componentDidMount(){
     this.setState({tickets: data.tickets})
   }
 
-  render(){
+  componentWillReceiveProps(nextProps){
+    // this.setState({tickets: data.tickets})
+    console.log(nextProps)
+  }
 
+  render(){
     const filters = this.props.filters;
     console.log(filters)
     const multiplier = this.props.currency.multiplier
     let ticketsArray
-    if (!filters.length) {
-     ticketsArray = data.tickets 
-    } else {
+
+    if (filters.length){
       ticketsArray = data.tickets.filter(ticket => {
         console.log(ticket.stops)
         return filters.some(filter => +filter === ticket.stops) 
       })
+    } else if (!filters.length) {
+      ticketsArray = data.tickets 
     }
+    // if (!filters.length) {
+    //  ticketsArray = data.tickets 
+    // } else {
+    //   ticketsArray = data.tickets.filter(ticket => {
+    //     console.log(ticket.stops)
+    //     return filters.some(filter => +filter === ticket.stops) 
+    //   })
+    // }
     console.log(ticketsArray)
   return (
     <div>
@@ -65,4 +77,4 @@ const mapStateToProps = (state) => ({
 
 
 
-export default connect(mapStateToProps)(TicketsBar);
+export default connect(mapStateToProps, null)(TicketsBar);
